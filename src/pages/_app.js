@@ -1,8 +1,9 @@
-import "../styles/app.scss"
+import "intersection-observer"
+import "../styles/main.scss"
 import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
-
+import { NavigationContextProvider } from "@contexts/navigation-context"
 const easing = [0.6, -0.05, 0.01, 0.99]
 const slideUp = {
   initial: {
@@ -38,25 +39,14 @@ const slideDown = {
   },
 }
 
+function MyAppContextProviders(props) {
+  return <NavigationContextProvider>{props.children}</NavigationContextProvider>
+}
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const [initialRender, setInitialRender] = useState(true)
-  const [canScroll, setCanScroll] = useState()
-
-  useEffect(() => {
-    if (canScroll) {
-      document.querySelector("body").classList.remove("no-scroll")
-    } else {
-      document.querySelector("body").classList.add("no-scroll")
-    }
-  }, [canScroll])
-
-  useEffect(() => {
-    if (loading || initialRender) {
-      setCanScroll(false)
-    }
-  }, [loading, initialRender])
+  const [initialRenderComplete, setInitialRenderComplete] = useState(false)
 
   useEffect(() => {
     const handleStart = () => setLoading(true)
@@ -74,7 +64,7 @@ function MyApp({ Component, pageProps }) {
   })
 
   return (
-    <>
+    <MyAppContextProviders>
       <div className="app">
         <AnimatePresence>{loading === false && <Component key="component" {...pageProps} />}</AnimatePresence>
       </div>
@@ -90,7 +80,6 @@ function MyApp({ Component, pageProps }) {
             style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
           >
             <motion.div
-              onAnimationComplete={() => requestAnimationFrame(() => setCanScroll(true))}
               variants={slideDown}
               initial="initial"
               animate="animate"
@@ -101,7 +90,7 @@ function MyApp({ Component, pageProps }) {
         )}
       </AnimatePresence>
       <AnimatePresence exitBeforeEnter>
-        {initialRender && (
+        {initialRenderComplete === false && (
           <motion.div
             key="app-intro-scene"
             className="app-intro-screen"
@@ -114,7 +103,7 @@ function MyApp({ Component, pageProps }) {
             style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
           >
             <motion.div
-              onAnimationComplete={() => requestAnimationFrame(() => setInitialRender(false))}
+              onAnimationComplete={() => requestAnimationFrame(() => setInitialRenderComplete(true))}
               variants={slideDown}
               initial="initial"
               animate="animate"
@@ -124,7 +113,7 @@ function MyApp({ Component, pageProps }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </MyAppContextProviders>
   )
 }
 

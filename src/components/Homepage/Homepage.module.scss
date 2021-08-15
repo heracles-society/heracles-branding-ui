@@ -1,0 +1,111 @@
+@use "@styles/base";
+@use "@styles/helpers/_mixins";
+@use "@styles/helpers/_variables";
+@use "@styles/components/_buttons";
+@import "include-media/dist/_include-media";
+
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.hero-image-background {
+  position: relative;
+  margin-top: 0;
+  padding-top: 25vh;
+  height: calc(100vh + 15vw);
+  overflow: hidden;
+}
+
+.image-background-container,
+.overlay,
+.image-background {
+  @include mixins.absolute-full;
+}
+
+.image-background-container {
+  .overlay {
+    z-index: 1;
+    opacity: 0.8;
+    background: radial-gradient(at 0% 0, black, transparent 70%), linear-gradient(0deg, black, transparent 100%) bottom;
+  }
+  .image-background {
+    height: 100%;
+    width: 100%;
+    & img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transform-origin: 50% 50%;
+      transition-duration: 150ms;
+      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+}
+
+.title {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  width: 75vw;
+  margin-left: variables.$spacing-9;
+  color: variables.$white;
+  overflow: hidden;
+
+  @include media("<=phone") {
+    margin-left: variables.$spacing-3;
+    width: calc(100% - #{variables.$spacing-2 +variables.$spacing-3});
+  }
+
+  @include media(">phone", "<=tablet") {
+    margin-left: variables.$spacing-5;
+    width: calc(100% - #{variables.$spacing-2 +variables.$spacing-5});
+  }
+
+  @include media(">tablet", "<=desktop") {
+    margin-left: variables.$spacing-8;
+    width: calc(100% - #{variables.$spacing-2 +variables.$spacing-8});
+  }
+
+  h1 {
+    font-size: variables.$font-size-12;
+    font-family: base.$font-family-title;
+    font-weight: bold;
+    @include media("<=phone") {
+      font-size: variables.$font-size-9;
+    }
+    @include media(">phone", "<=tablet") {
+      font-size: variables.$font-size-10;
+    }
+    @include media(">tablet", "<=desktop") {
+      font-size: variables.$font-size-12;
+    }
+  }
+
+  p,
+  a {
+    font-family: base.$font-family-content-2;
+    font-size: variables.$font-size-4;
+    line-height: variables.$font-size-7;
+    max-width: variables.$spacing-13;
+    margin: variables.$spacing-4 variables.$spacing-5 0 0;
+    @include media("<=phone") {
+      font-size: variables.$font-size-4;
+    }
+    @include media(">phone", "<=desktop") {
+      font-size: variables.$font-size-5;
+    }
+  }
+
+  p,
+  a {
+    width: 100%;
+  }
+
+  a {
+    display: inline-block;
+    color: variables.$primary;
+    text-decoration: none;
+  }
+}

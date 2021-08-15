@@ -1,6 +1,7 @@
 export const easingValues = {
   "ease-1": [0.6, 0.01, -0.05, 0.9],
   "ease-2": [0.43, 0.13, 0.23, 0.96],
+  "ease-3": [0.165, 0.84, 0.44, 1],
 }
 
 export const defaultTransition = {
@@ -26,13 +27,13 @@ export const LANDING_SUBHEADING =
 export const LANDING_LINK = "Click here to know more"
 
 // Builders components
-export const BUILDER_TITLE = "For Real Estate"
+export const BUILDER_TITLE = "We assist dealing in Real Estate"
 export const BUILDER_SUBTITLE = "Easy and approchable platform for customers."
 export const BUILDER_DESC =
   "Sell, Purchase or Rent will be effort less as society administration provide you all the data and it's geniune guranteed by Heracles. Select society, flat based on one click and gets 100% satisfied report without any third party involvment."
 
 // HomeOwner Component
-export const OWNER_TITLE = "For Home owners"
+export const OWNER_TITLE = "We provide many services for apartment owners."
 export const OWNER_SUBTITLE = "Leave your after accomodation worries to Heracles"
 export const OWNER_DESCRIPTION =
   "Providing easy platform to pay maintainance or electricity bill, book club house, register complain, Notification mechanism, security, access request , visitors permission from single portal with less effort."
@@ -47,6 +48,12 @@ export const SECURITY_DESC =
 export const MANAGER_TITLE = "For Society Manager"
 export const MANAGER_SUBTITLE = "Let Heracles lend a hand in managing everything for you."
 export const MANAGER_DESC =
+  "Easy to handle new onboarding request, generate bills for respective user, notifiy society with real time notification, provide access to user, handle security system."
+
+// Renters Component
+export const RENTER_TITLE = "We know renting is hard. We'll make it easy for you"
+export const RENTER_SUBTITLE = "Let Heracles lend a hand in managing everything for you."
+export const RENTER_DESC =
   "Easy to handle new onboarding request, generate bills for respective user, notifiy society with real time notification, provide access to user, handle security system."
 
 // Contact Us constant
